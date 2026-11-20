@@ -62,6 +62,10 @@ html, body {
 }
 
 .safe-bottom-padding {
-  padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 120px), 130px);
+  padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 75px), 85px);
+}
+
+.bottom-nav-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px);
 }
 

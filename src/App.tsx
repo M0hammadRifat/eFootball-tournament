@@ -39,7 +39,7 @@ import { onFirebaseAuthStateChanged, logOut } from './services/firebase';
 import { Tournament, MatchFixture, UserProfile, LeaderboardEntry, AppSettings, WalletTransaction } from './types/tournament';
 import { getAppSettings, subscribeToAppSettings } from './services/settingsService';
 import { subscribeToTransactions } from './services/walletService';
-import { Radio, Trophy, Gamepad2, Wallet, User, ShieldCheck } from 'lucide-react';
+import { Radio, Trophy, Gamepad2, Wallet, User, ShieldCheck, BarChart3, Coins } from 'lucide-react';
 import { Header } from './components/Header';
 import { DashboardView } from './components/DashboardView';
 import { FixturesView } from './components/FixturesView';
@@ -390,8 +390,8 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Container with generous bottom safe area */}
-      <main className="flex-1 mx-auto w-full max-w-7xl px-2.5 sm:px-6 py-3 sm:py-6 pb-[max(calc(env(safe-area-inset-bottom,0px)+120px),130px)] sm:pb-24">
+      {/* Main Container with comfortable bottom spacing above the nav bar */}
+      <main className="flex-1 mx-auto w-full max-w-7xl px-2.5 sm:px-6 py-3 sm:py-6 pb-24 sm:pb-16">
         
         {activeTab === 'dashboard' && (
           <DashboardView
@@ -587,14 +587,14 @@ export default function App() {
       {/* Offline Status Detector (PWA requirement) */}
       <OfflineIndicator />
 
-      {/* Mobile Fixed Bottom Navigation Bar (Matching Attachments 5 & 6) */}
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#070b14]/95 backdrop-blur-xl border-t border-slate-800/80 px-2 py-1.5 flex items-center justify-around safe-bottom-padding shadow-2xl">
+      {/* Mobile Fixed Bottom Navigation Bar (Esports Pro Style) */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#070b14]/95 backdrop-blur-2xl border-t border-slate-800/90 px-1.5 pt-1.5 bottom-nav-safe flex items-center justify-around shadow-[0_-8px_30px_rgba(0,0,0,0.85)]">
         {/* 1. Tournaments / Home */}
         <button
           onClick={() => setActiveTab('dashboard')}
-          className={`flex flex-col items-center gap-0.5 py-1 px-2.5 rounded-xl transition ${
+          className={`flex flex-col items-center gap-0.5 py-1 px-2 rounded-xl transition-all duration-200 active:scale-95 ${
             activeTab === 'dashboard'
-              ? 'text-cyan-400 font-black'
+              ? 'text-[#00ff87] font-black bg-[#00ff87]/15 border border-[#00ff87]/40 shadow-[0_0_12px_rgba(0,255,135,0.25)]'
               : 'text-slate-400 hover:text-slate-200 font-medium'
           }`}
         >
@@ -605,44 +605,60 @@ export default function App() {
         {/* 2. My Matches / Fixtures */}
         <button
           onClick={() => setActiveTab('fixtures')}
-          className={`flex flex-col items-center gap-0.5 py-1 px-2.5 rounded-xl transition ${
+          className={`flex flex-col items-center gap-0.5 py-1 px-2 rounded-xl transition-all duration-200 active:scale-95 ${
             activeTab === 'fixtures'
-              ? 'text-cyan-400 font-black'
+              ? 'text-cyan-400 font-black bg-cyan-500/15 border border-cyan-500/40 shadow-[0_0_12px_rgba(6,182,212,0.25)]'
               : 'text-slate-400 hover:text-slate-200 font-medium'
           }`}
         >
           <Gamepad2 className="w-5 h-5" />
-          <span className="text-[10px] tracking-tight">My Matches</span>
+          <span className="text-[10px] tracking-tight">Matches</span>
         </button>
 
-        {/* 3. Wallet */}
+        {/* 3. Leaderboard / Standings */}
+        <button
+          onClick={() => setActiveTab('leaderboard')}
+          className={`flex flex-col items-center gap-0.5 py-1 px-2 rounded-xl transition-all duration-200 active:scale-95 ${
+            activeTab === 'leaderboard'
+              ? 'text-purple-400 font-black bg-purple-500/15 border border-purple-500/40 shadow-[0_0_12px_rgba(168,85,247,0.25)]'
+              : 'text-slate-400 hover:text-slate-200 font-medium'
+          }`}
+        >
+          <BarChart3 className="w-5 h-5" />
+          <span className="text-[10px] tracking-tight">Standings</span>
+        </button>
+
+        {/* 4. Wallet */}
         <button
           onClick={() => {
             setWalletInitialTab('deposit');
             setIsWalletModalOpen(true);
           }}
-          className="flex flex-col items-center gap-0.5 py-1 px-2.5 rounded-xl text-emerald-400 hover:text-emerald-300 transition"
+          className="flex flex-col items-center gap-0.5 py-1 px-2 rounded-xl text-emerald-400 hover:text-emerald-300 transition-all duration-200 active:scale-95 bg-emerald-950/40 border border-emerald-500/30 hover:border-emerald-500/60"
         >
-          <Wallet className="w-5 h-5" />
-          <span className="text-[10px] tracking-tight font-black">৳{currentUser.balance || 0}</span>
+          <Coins className="w-5 h-5 text-amber-400" />
+          <span className="text-[10px] tracking-tight font-black font-mono">৳{currentUser.balance || 0}</span>
         </button>
 
-        {/* 4. Profile */}
+        {/* 5. Profile */}
         <button
           onClick={() => setIsProfileModalOpen(true)}
-          className="flex flex-col items-center gap-0.5 py-1 px-2.5 rounded-xl text-slate-400 hover:text-white transition"
+          className="flex flex-col items-center gap-0.5 py-1 px-2 rounded-xl text-slate-400 hover:text-white transition-all duration-200 active:scale-95"
         >
-          <User className="w-5 h-5" />
+          <div className="relative">
+            <User className="w-5 h-5" />
+            <span className="absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-[#00ff87] border border-slate-900" />
+          </div>
           <span className="text-[10px] tracking-tight">Profile</span>
         </button>
 
-        {/* 5. Admin (Admin only) */}
+        {/* 6. Admin (Admin only) */}
         {isUserAdmin(currentUser) && (
           <button
             onClick={() => setActiveTab('admin')}
-            className={`flex flex-col items-center gap-0.5 py-1 px-2.5 rounded-xl transition ${
+            className={`flex flex-col items-center gap-0.5 py-1 px-2 rounded-xl transition-all duration-200 active:scale-95 ${
               activeTab === 'admin'
-                ? 'text-amber-400 font-black'
+                ? 'text-amber-400 font-black bg-amber-500/15 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
                 : 'text-amber-500/70 hover:text-amber-400 font-medium'
             }`}
           >
