@@ -18,8 +18,8 @@ const STORAGE_KEY_TELEGRAM = 'efootball_telegram_config';
 
 export const DEFAULT_TELEGRAM_CONFIG: TelegramConfigSettings = {
   webhookUrl: window.location.origin + '/telegram-notify.php',
-  botToken: '8987455572:AAFoQqyXCFg4s2FbJmi5hC5pYnNuJo5f7Cw',
-  chatId: '-1003711089928', // @eFootballTournamentBD channel
+  botToken: (import.meta as any).env?.VITE_TELEGRAM_BOT_TOKEN || '',
+  chatId: (import.meta as any).env?.VITE_TELEGRAM_CHAT_ID || '-1003711089928', // @eFootballTournamentBD channel
   secretKey: '',
   autoNotifyOnApproval: true,
   autoNotifyOnCreate: true

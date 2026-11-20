@@ -6,8 +6,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DEFAULT_BOT_TOKEN = '8987455572:AAFoQqyXCFg4s2FbJmi5hC5pYnNuJo5f7Cw';
-const DEFAULT_CHAT_ID = '-1003711089928';
+const DEFAULT_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
+const DEFAULT_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '-1003711089928';
 
 /**
  * Normalizes Telegram Chat ID.

@@ -27,8 +27,8 @@
 // -------------------------------------------------------------
 // 1. CONFIGURATION - REPLACE WITH YOUR TELEGRAM CREDENTIALS
 // -------------------------------------------------------------
-define('TELEGRAM_BOT_TOKEN', '8987455572:AAFoQqyXCFg4s2FbJmi5hC5pYnNuJo5f7Cw'); // @eFootballTournamentBDBot
-define('TELEGRAM_CHAT_ID', '-1003711089928');                                     // @eFootballTournamentBD Channel
+define('TELEGRAM_BOT_TOKEN', getenv('TELEGRAM_BOT_TOKEN') ?: 'YOUR_TELEGRAM_BOT_TOKEN_HERE');
+define('TELEGRAM_CHAT_ID', getenv('TELEGRAM_CHAT_ID') ?: '-1003711089928');
 define('WEBHOOK_SECRET_KEY', '');                                                 // Optional security token. Leave empty to allow all requests.
 
 // -------------------------------------------------------------
